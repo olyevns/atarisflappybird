@@ -1,69 +1,98 @@
-body {
-    margin: 0;
-    background-color: #87CEEB; /* Sky color */
-    overflow: hidden; /* Prevent scrolling */
+/* Animations */
+@-webkit-keyframes animLand {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -335px 0px; }
+}
+@-moz-keyframes animLand {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -335px 0px; }
+}
+@-o-keyframes animLand {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -335px 0px; }
+}
+@keyframes animLand {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -335px 0px; }
 }
 
-#game-container {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
+@-webkit-keyframes animSky {
+  0% { background-position: 0px 100%; }
+  100% { background-position: -275px 100%; }
+}
+@-moz-keyframes animSky {
+  0% { background-position: 0px 100%; }
+  100% { background-position: -275px 100%; }
+}
+@-o-keyframes animSky {
+  0% { background-position: 0px 100%; }
+  100% { background-position: -275px 100%; }
+}
+@keyframes animSky {
+  0% { background-position: 0px 100%; }
+  100% { background-position: -275px 100%; }
 }
 
-#flyarea {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: calc(100vh - 40px); /* Assuming the ground is 40px high */
-    background-color: transparent; /* Ensure it can contain pipes */
+@-webkit-keyframes animBird {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px -96px; }
+}
+@-moz-keyframes animBird {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px -96px; }
+}
+@-o-keyframes animBird {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px -96px; }
+}
+@keyframes animBird {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px -96px; }
 }
 
-#player {
-    position: absolute;
-    width: 34px; /* Example size */
-    height: 24px; /* Example size */
+@-webkit-keyframes animPipe {
+  0% { left: 900px; }
+  100% { left: -100px; }
+}
+@-moz-keyframes animPipe {
+  0% { left: 900px; }
+  100% { left: -100px; }
+}
+@-o-keyframes animPipe {
+  0% { left: 900px; }
+  100% { left: -100px; }
+}
+@keyframes animPipe {
+  0% { left: 900px; }
+  100% { left: -100px; }
 }
 
-.pipe {
-    position: absolute;
-    background-color: #008000; /* Pipe color */
+@-webkit-keyframes animCeiling {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -63px 0px; }
+}
+@-moz-keyframes animCeiling {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -63px 0px; }
+}
+@-o-keyframes animCeiling {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -63px 0px; }
+}
+@keyframes animCeiling {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -63px 0px; }
 }
 
-#land {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    background-color: green; /* Ground color */
-}
-
-#splash {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    opacity: 1;
-    transition: opacity 0.5s;
-}
-
-#replay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0; /* Initially hidden */
-}
-
-#scoreboard {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: none; /* Initially hidden */
-    z-index: 10; /* Ensure it appears on top */
-}
+/* Generic Styles */
+*,
+*:before,
+*:after {
+  /* border box */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* gpu acceleration */
+  -webkit-transition: translate3d(0,0,0);
+  /* select disable */
+  -webkit-touch-callout:
