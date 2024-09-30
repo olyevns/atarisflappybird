@@ -1,100 +1,112 @@
-/* General body styling */
 body {
-    margin: 0; /* Remove default margin */
-    overflow: hidden; /* Prevent scrolling */
-    background-color: #0c8eff; /* Background color */
+    margin: 0;
+    overflow: hidden;
+    background-color: #70c5ce; /* Default background color */
 }
 
-/* Main game area */
 #flyarea {
-    position: relative; /* Allows positioning of children */
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Hide overflow to prevent scrolling */
-    display: flex;
-    align-items: flex-end; /* Align elements to the bottom */
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full height */
+    overflow: hidden;
+    background: url('assets/background.png') no-repeat center center fixed; /* Background image */
+    background-size: cover; /* Cover the entire area */
 }
 
-/* Styling for pipes */
+#player {
+    position: absolute;
+    width: 34px; /* Width of the bird */
+    height: 24px; /* Height of the bird */
+    background: url('assets/bird.png') no-repeat; /* Bird image */
+    background-size: contain; /* Ensure the image fits */
+}
+
 .pipe {
-    position: absolute; /* Absolute positioning for moving pipes */
-    bottom: 0; /* Align pipes to the bottom */
-    width: 52px; /* Width of pipes */
-    background-color: green; /* Pipe color */
+    position: absolute;
+    width: 52px; /* Width of the pipe */
+    background: url('assets/pipe.png') no-repeat; /* Pipe image */
+    background-size: contain; /* Ensure the image fits */
 }
 
 .pipe_upper {
-    background-color: green; /* Color of upper pipe */
+    bottom: 100%; /* Upper pipe is positioned above */
 }
 
 .pipe_lower {
-    background-color: green; /* Color of lower pipe */
+    bottom: 0; /* Lower pipe is at the bottom */
 }
 
-/* Player styling */
-#player {
-    position: absolute; /* Absolute positioning for player */
-    bottom: 180px; /* Initial vertical position */
-    width: 34px; /* Player width */
-    height: 24px; /* Player height */
-    background-image: url('assets/player.png'); /* Player image */
-    background-size: cover; /* Cover the entire player element */
+#land {
+    position: absolute;
+    bottom: 0;
+    height: 100px; /* Height of the land */
+    width: 100%;
+    background: url('assets/land.png') no-repeat; /* Land image */
+    background-size: cover; /* Ensure it fits */
 }
 
-/* Splash screen and scoreboard styling */
-#splash, #scoreboard {
-    display: none; /* Hidden initially */
-    position: absolute; /* Position relative to the flyarea */
-    width: 100%; /* Full width */
-    text-align: center; /* Center text */
-    color: white; /* Text color */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Center correction */
+#splash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none; /* Hide the splash screen initially */
 }
 
-/* Score size */
-#bigscore, #currentscore, #highscore {
-    font-size: 48px; /* Large score size */
-    margin: 10px 0; /* Margin for separation */
+#splash h1 {
+    font-size: 36px;
+    color: white;
 }
 
-/* Medal positioning */
+#start {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#scoreboard {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Hide scoreboard initially */
+    text-align: center;
+    color: white;
+}
+
+#bigscore {
+    font-size: 48px;
+}
+
+#currentscore,
+#highscore {
+    font-size: 24px;
+}
+
 #medal {
-    position: absolute; /* Position for medal */
-    top: 10px; /* Positioning from the top */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center correction */
+    display: none; /* Hide medal initially */
 }
 
-/* Replay button styling */
 #replay {
-    position: absolute; /* Absolute positioning */
-    bottom: 20px; /* Position near the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center correction */
-    padding: 10px 20px; /* Padding for the button */
-    font-size: 24px; /* Font size for button */
-    background-color: #ff9800; /* Button background color */
-    border: none; /* Remove border */
-    color: white; /* Text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
+    display: none; /* Hide the replay button initially */
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#replay:hover {
-    background-color: #e68a00; /* Darker color on hover */
+#replay:hover,
+#start:hover {
+    background-color: rgba(255, 255, 255, 1);
 }
 
-/* Animation for splash and scoreboard */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-#splash, #scoreboard {
-    animation: fadeIn 0.5s forwards; /* Fade-in effect */
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keep the last keyframe state */
 }
