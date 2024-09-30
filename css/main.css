@@ -1,112 +1,137 @@
-body {
+* {
     margin: 0;
-    overflow: hidden;
-    background-color: #70c5ce; /* Default background color */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #70c5ce; /* Original background color */
+    overflow: hidden; /* Prevent scrolling */
 }
 
 #flyarea {
     position: relative;
-    width: 100%;
+    width: 100vw; /* Full width */
     height: 100vh; /* Full height */
-    overflow: hidden;
-    background: url('assets/background.png') no-repeat center center fixed; /* Background image */
-    background-size: cover; /* Cover the entire area */
+    overflow: hidden; /* Hide overflow to keep elements inside */
 }
 
 #player {
     position: absolute;
-    width: 34px; /* Width of the bird */
-    height: 24px; /* Height of the bird */
-    background: url('assets/bird.png') no-repeat; /* Bird image */
-    background-size: contain; /* Ensure the image fits */
+    bottom: 50%; /* Centered vertically */
+    left: 20%; /* Positioning can be adjusted */
+    width: 34px; /* Size of the bird */
+    height: 24px; /* Size of the bird */
+    background-image: url('assets/bird.png'); /* Bird image */
+    background-size: cover; /* Ensure the image covers the entire area */
 }
 
 .pipe {
     position: absolute;
-    width: 52px; /* Width of the pipe */
-    background: url('assets/pipe.png') no-repeat; /* Pipe image */
-    background-size: contain; /* Ensure the image fits */
+    left: 100%; /* Start off the right side */
+    bottom: 0;
+    width: 52px; /* Width of the pipes */
+    background-image: url('assets/pipe.png'); /* Pipe image */
+    background-size: cover; /* Ensure the image covers the entire area */
 }
 
 .pipe_upper {
-    bottom: 100%; /* Upper pipe is positioned above */
+    position: absolute;
+    bottom: 100%; /* Upper pipe goes above the bottom */
 }
 
 .pipe_lower {
-    bottom: 0; /* Lower pipe is at the bottom */
+    position: absolute;
+    bottom: 0; /* Lower pipe sits at the bottom */
 }
 
 #land {
     position: absolute;
     bottom: 0;
-    height: 100px; /* Height of the land */
-    width: 100%;
-    background: url('assets/land.png') no-repeat; /* Land image */
-    background-size: cover; /* Ensure it fits */
+    width: 100%; /* Full width */
+    height: 112px; /* Height of the land */
+    background-image: url('assets/land.png'); /* Land image */
+    background-size: cover; /* Ensure the image covers the entire area */
 }
 
-#splash {
+#scoreboard {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    display: none; /* Hide the splash screen initially */
-}
-
-#splash h1 {
-    font-size: 36px;
-    color: white;
-}
-
-#start {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#scoreboard {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none; /* Hide scoreboard initially */
-    text-align: center;
-    color: white;
+    opacity: 0; /* Initially hidden */
 }
 
 #bigscore {
-    font-size: 48px;
+    font-size: 48px; /* Large score display */
 }
 
 #currentscore,
 #highscore {
-    font-size: 24px;
-}
-
-#medal {
-    display: none; /* Hide medal initially */
+    font-size: 24px; /* Smaller score displays */
 }
 
 #replay {
-    display: none; /* Hide the replay button initially */
+    display: none; /* Initially hidden */
+    margin-top: 20px;
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    font-size: 20px; /* Size of the button text */
 }
 
-#replay:hover,
-#start:hover {
-    background-color: rgba(255, 255, 255, 1);
+#medal {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s; /* Fade in effect */
 }
 
-.animated {
-    animation-duration: 1s;
-    animation-fill-mode: forwards; /* Keep the last keyframe state */
+/* Additional responsive design */
+@media (max-width: 768px) {
+    #player {
+        width: 28px; /* Smaller bird size for mobile */
+        height: 20px;
+    }
+
+    .pipe {
+        width: 40px; /* Smaller pipes for mobile */
+    }
+
+    #bigscore {
+        font-size: 36px; /* Adjusted font size for smaller screens */
+    }
+
+    #currentscore,
+    #highscore {
+        font-size: 18px; /* Smaller font size */
+    }
+
+    #replay {
+        font-size: 18px; /* Smaller button text for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    #player {
+        width: 24px; /* Even smaller bird size */
+        height: 18px;
+    }
+
+    .pipe {
+        width: 35px; /* Even smaller pipes */
+    }
+
+    #bigscore {
+        font-size: 30px; /* Further adjusted font size */
+    }
+
+    #currentscore,
+    #highscore {
+        font-size: 16px; /* Even smaller font size */
+    }
+
+    #replay {
+        font-size: 16px; /* Further adjusted button text */
+    }
 }
