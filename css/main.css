@@ -1,89 +1,100 @@
-/* General Body Styles */
+/* General body styling */
 body {
-    margin: 0;
+    margin: 0; /* Remove default margin */
     overflow: hidden; /* Prevent scrolling */
-    background-color: #70c5ce; /* Background color of the game area */
-    font-family: 'Arial', sans-serif; /* Default font */
+    background-color: #0c8eff; /* Background color */
 }
 
-/* Game Area Styles */
+/* Main game area */
 #flyarea {
-    position: relative;
-    width: 100%; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: hidden; /* Hide overflow */
-}
-
-/* Splash Screen Styles */
-#splash {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.5s ease;
+    position: relative; /* Allows positioning of children */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflow to prevent scrolling */
     display: flex;
-    justify-content: center;
-    align-items: center; /* Center content */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    align-items: flex-end; /* Align elements to the bottom */
 }
 
-/* Player Styles */
-#player {
-    position: absolute;
-    width: 34px; /* Adjust based on your sprite size */
-    height: 24px; /* Adjust based on your sprite size */
-}
-
-/* Pipe Styles */
+/* Styling for pipes */
 .pipe {
-    position: absolute;
-    width: 52px; /* Width of pipe */
-    background-color: green; /* Example color for pipes */
+    position: absolute; /* Absolute positioning for moving pipes */
+    bottom: 0; /* Align pipes to the bottom */
+    width: 52px; /* Width of pipes */
+    background-color: green; /* Pipe color */
 }
 
-/* Scoreboard Styles */
-#scoreboard {
-    position: absolute;
-    top: 20px; /* Distance from the top */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.6s ease; /* Transition for score display */
+.pipe_upper {
+    background-color: green; /* Color of upper pipe */
 }
 
-/* Replay Button Styles */
-#replay {
-    position: absolute;
-    bottom: 30px; /* Distance from the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.6s ease; /* Transition for replay button display */
+.pipe_lower {
+    background-color: green; /* Color of lower pipe */
 }
 
-/* Medal Styles */
+/* Player styling */
+#player {
+    position: absolute; /* Absolute positioning for player */
+    bottom: 180px; /* Initial vertical position */
+    width: 34px; /* Player width */
+    height: 24px; /* Player height */
+    background-image: url('assets/player.png'); /* Player image */
+    background-size: cover; /* Cover the entire player element */
+}
+
+/* Splash screen and scoreboard styling */
+#splash, #scoreboard {
+    display: none; /* Hidden initially */
+    position: absolute; /* Position relative to the flyarea */
+    width: 100%; /* Full width */
+    text-align: center; /* Center text */
+    color: white; /* Text color */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center correction */
+}
+
+/* Score size */
+#bigscore, #currentscore, #highscore {
+    font-size: 48px; /* Large score size */
+    margin: 10px 0; /* Margin for separation */
+}
+
+/* Medal positioning */
 #medal {
-    position: absolute;
-    top: 30px; /* Distance from the top */
-    right: 30px; /* Distance from the right */
-    opacity: 0; /* Hidden initially */
-    transition: opacity 1.2s ease; /* Transition for medal display */
+    position: absolute; /* Position for medal */
+    top: 10px; /* Positioning from the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center correction */
 }
 
-/* Hiding the Brick Layer */
-#brick-layer {
-    position: absolute;
-    top: -100px; /* Position to hide it off-screen */
-    left: 0;
-    width: 100%;
-    height: 100px; /* Height of the brick layer */
-    background: gray; /* Example background color */
-    overflow: hidden; /* Ensure it doesn't affect layout */
+/* Replay button styling */
+#replay {
+    position: absolute; /* Absolute positioning */
+    bottom: 20px; /* Position near the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center correction */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 24px; /* Font size for button */
+    background-color: #ff9800; /* Button background color */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded corners */
 }
 
-/* Animation Play State */
-.animated {
-    animation-play-state: running; /* Default animation state */
+#replay:hover {
+    background-color: #e68a00; /* Darker color on hover */
+}
+
+/* Animation for splash and scoreboard */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#splash, #scoreboard {
+    animation: fadeIn 0.5s forwards; /* Fade-in effect */
 }
