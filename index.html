@@ -20,13 +20,19 @@
             overflow: hidden; /* Prevent scrolling */
         }
 
-        #gamecontainer {
+        /* Wrapper for scaling and translating */
+        #wrapper {
             width: 100vw;    /* Full viewport width */
             height: 100vh;   /* Full viewport height */
             overflow: hidden; /* Prevent scrolling */
             position: relative; /* Positioning context for children */
             transform: scale(2) translateY(-30%); /* Scale the game up by 2x and move down by 30% */
             transform-origin: top left; /* Keep the origin at the top left */
+        }
+
+        #gamecontainer {
+            width: 100%; /* Full width to accommodate scaling */
+            height: 100%; /* Full height to accommodate scaling */
         }
 
         #gamescreen {
@@ -36,23 +42,25 @@
     </style>
 </head>
 <body>
-    <div id="gamecontainer">
-        <div id="gamescreen">
-            <div id="sky" class="animated">
-                <div id="flyarea">
-                    <div id="ceiling" class="animated"></div>
-                    <div id="player" class="bird animated"></div>
-                    <div id="bigscore"></div>
-                    <div id="splash"></div>
-                    <div id="scoreboard">
-                        <div id="medal"></div>
-                        <div id="currentscore"></div>
-                        <div id="highscore"></div>
-                        <div id="replay"><img src="assets/replay.png" alt="replay"></div>
+    <div id="wrapper">
+        <div id="gamecontainer">
+            <div id="gamescreen">
+                <div id="sky" class="animated">
+                    <div id="flyarea">
+                        <div id="ceiling" class="animated"></div>
+                        <div id="player" class="bird animated"></div>
+                        <div id="bigscore"></div>
+                        <div id="splash"></div>
+                        <div id="scoreboard">
+                            <div id="medal"></div>
+                            <div id="currentscore"></div>
+                            <div id="highscore"></div>
+                            <div id="replay"><img src="assets/replay.png" alt="replay"></div>
+                        </div>
                     </div>
                 </div>
+                <div id="land" class="animated"><div id="debug"></div></div>
             </div>
-            <div id="land" class="animated"><div id="debug"></div></div>
         </div>
     </div>
     <div class="boundingbox" id="playerbox"></div>
