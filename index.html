@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Flappy Bird</title>
+    <title>Flappy Bird Clone</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.0/buzz.min.js"></script>
+    <script src="main.js" defer></script> <!-- Link to your JS file -->
 </head>
 <body>
     <div id="flyarea">
-        <div id="player" class="animated"></div>
+        <div id="player"></div>
         <div id="land"></div>
-        <div id="splash">
-            <h1>Flappy Bird Clone</h1>
-            <button id="start">Start</button>
-        </div>
-        <div id="scoreboard">
+        <div id="scoreboard" style="display: none;">
             <div id="bigscore"></div>
             <div id="currentscore"></div>
             <div id="highscore"></div>
-            <div id="medal"></div>
             <button id="replay">Replay</button>
+            <div id="medal"></div>
         </div>
+        <!-- Placeholder for pipes; will be added dynamically -->
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.0/buzz.min.js"></script>
-    <script src="main.js"></script>
+    <div id="splash">
+        <h1>Welcome to Flappy Bird!</h1>
+        <button id="start">Start Game</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#start").click(function() {
+                startGame();
+            });
+        });
+    </script>
 </body>
 </html>
