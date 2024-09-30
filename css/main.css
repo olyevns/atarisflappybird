@@ -1,137 +1,83 @@
-* {
+/* General reset for body and html */
+body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #70c5ce; /* Original background color */
     overflow: hidden; /* Prevent scrolling */
+    height: 100%; /* Ensure full height */
+    width: 100%; /* Ensure full width */
 }
 
+/* Fly area that contains the game */
 #flyarea {
     position: relative;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: hidden; /* Hide overflow to keep elements inside */
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw; /* Full width of the viewport */
+    overflow: hidden; /* Hide overflow */
+    transform: scale(1.2); /* Adjust the scaling factor as necessary */
+    transform-origin: top; /* Scale from the top */
 }
 
-#player {
-    position: absolute;
-    bottom: 50%; /* Centered vertically */
-    left: 20%; /* Positioning can be adjusted */
-    width: 34px; /* Size of the bird */
-    height: 24px; /* Size of the bird */
-    background-image: url('assets/bird.png'); /* Bird image */
-    background-size: cover; /* Ensure the image covers the entire area */
-}
-
+/* Style for the pipes */
 .pipe {
     position: absolute;
-    left: 100%; /* Start off the right side */
-    bottom: 0;
-    width: 52px; /* Width of the pipes */
-    background-image: url('assets/pipe.png'); /* Pipe image */
-    background-size: cover; /* Ensure the image covers the entire area */
+    left: 100%; /* Start from the right of the fly area */
 }
 
+/* Upper part of the pipes */
 .pipe_upper {
-    position: absolute;
-    bottom: 100%; /* Upper pipe goes above the bottom */
+    background-color: #228B22; /* Green color for the upper pipe */
 }
 
+/* Lower part of the pipes */
 .pipe_lower {
-    position: absolute;
-    bottom: 0; /* Lower pipe sits at the bottom */
+    background-color: #228B22; /* Green color for the lower pipe */
 }
 
-#land {
+/* Player element */
+#player {
     position: absolute;
-    bottom: 0;
-    width: 100%; /* Full width */
-    height: 112px; /* Height of the land */
-    background-image: url('assets/land.png'); /* Land image */
-    background-size: cover; /* Ensure the image covers the entire area */
+    transition: all 0.1s ease; /* Smooth transition for movement */
 }
 
+/* Scoreboard and replay button styles */
 #scoreboard {
     position: absolute;
-    top: 50%;
+    bottom: 20px; /* Position it above the bottom of the viewport */
     left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    transform: translateX(-50%); /* Center horizontally */
     opacity: 0; /* Initially hidden */
 }
 
-#bigscore {
-    font-size: 48px; /* Large score display */
-}
-
-#currentscore,
-#highscore {
-    font-size: 24px; /* Smaller score displays */
-}
-
+/* Replay button */
 #replay {
-    display: none; /* Initially hidden */
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 20px; /* Size of the button text */
-}
-
-#medal {
+    position: absolute;
+    bottom: 70px; /* Above the scoreboard */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
     opacity: 0; /* Initially hidden */
-    transition: opacity 1s; /* Fade in effect */
 }
 
-/* Additional responsive design */
-@media (max-width: 768px) {
-    #player {
-        width: 28px; /* Smaller bird size for mobile */
-        height: 20px;
-    }
-
-    .pipe {
-        width: 40px; /* Smaller pipes for mobile */
-    }
-
-    #bigscore {
-        font-size: 36px; /* Adjusted font size for smaller screens */
-    }
-
-    #currentscore,
-    #highscore {
-        font-size: 18px; /* Smaller font size */
-    }
-
-    #replay {
-        font-size: 18px; /* Smaller button text for mobile */
-    }
+/* Splash screen */
+#splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    opacity: 1; /* Initially visible */
 }
 
-@media (max-width: 480px) {
-    #player {
-        width: 24px; /* Even smaller bird size */
-        height: 18px;
-    }
-
-    .pipe {
-        width: 35px; /* Even smaller pipes */
-    }
-
-    #bigscore {
-        font-size: 30px; /* Further adjusted font size */
-    }
-
-    #currentscore,
-    #highscore {
-        font-size: 16px; /* Even smaller font size */
-    }
-
-    #replay {
-        font-size: 16px; /* Further adjusted button text */
-    }
+/* Additional styling for animated elements */
+.animated {
+    animation: animate 1s infinite; /* Example animation */
 }
+
+/* Keyframes for animations */
+@keyframes animate {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Adjust any other styles as needed */
