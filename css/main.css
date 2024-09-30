@@ -1,83 +1,69 @@
-/* General reset for body and html */
-body, html {
+body {
     margin: 0;
-    padding: 0;
+    background-color: #87CEEB; /* Sky color */
     overflow: hidden; /* Prevent scrolling */
-    height: 100%; /* Ensure full height */
-    width: 100%; /* Ensure full width */
 }
 
-/* Fly area that contains the game */
-#flyarea {
+#game-container {
     position: relative;
-    height: 100vh; /* Full height of the viewport */
-    width: 100vw; /* Full width of the viewport */
-    overflow: hidden; /* Hide overflow */
-    transform: scale(1.2); /* Adjust the scaling factor as necessary */
-    transform-origin: top; /* Scale from the top */
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* Style for the pipes */
-.pipe {
+#flyarea {
     position: absolute;
-    left: 100%; /* Start from the right of the fly area */
+    bottom: 0;
+    width: 100%;
+    height: calc(100vh - 40px); /* Assuming the ground is 40px high */
+    background-color: transparent; /* Ensure it can contain pipes */
 }
 
-/* Upper part of the pipes */
-.pipe_upper {
-    background-color: #228B22; /* Green color for the upper pipe */
-}
-
-/* Lower part of the pipes */
-.pipe_lower {
-    background-color: #228B22; /* Green color for the lower pipe */
-}
-
-/* Player element */
 #player {
     position: absolute;
-    transition: all 0.1s ease; /* Smooth transition for movement */
+    width: 34px; /* Example size */
+    height: 24px; /* Example size */
 }
 
-/* Scoreboard and replay button styles */
-#scoreboard {
+.pipe {
     position: absolute;
-    bottom: 20px; /* Position it above the bottom of the viewport */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    opacity: 0; /* Initially hidden */
+    background-color: #008000; /* Pipe color */
 }
 
-/* Replay button */
-#replay {
+#land {
     position: absolute;
-    bottom: 70px; /* Above the scoreboard */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    opacity: 0; /* Initially hidden */
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: green; /* Ground color */
 }
 
-/* Splash screen */
 #splash {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    opacity: 1; /* Initially visible */
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
-/* Additional styling for animated elements */
-.animated {
-    animation: animate 1s infinite; /* Example animation */
+#replay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Initially hidden */
 }
 
-/* Keyframes for animations */
-@keyframes animate {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+#scoreboard {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: none; /* Initially hidden */
+    z-index: 10; /* Ensure it appears on top */
 }
-
-/* Adjust any other styles as needed */
