@@ -1,9 +1,9 @@
 var debugmode = false;
 
 var states = Object.freeze({
-   SplashScreen: 0,
-   GameScreen: 1,
-   ScoreScreen: 2
+    SplashScreen: 0,
+    GameScreen: 1,
+    ScoreScreen: 2
 });
 
 var currentstate;
@@ -20,11 +20,11 @@ var highscore = 0;
 
 var pipeheight = 90;
 var pipewidth = 52;
-var pipes = [];
+var pipes = new Array();
 
 var replayclickable = false;
 
-// Sounds
+//sounds
 var volume = 30;
 var soundJump = new buzz.sound("assets/sounds/sfx_wing.ogg");
 var soundScore = new buzz.sound("assets/sounds/sfx_point.ogg");
@@ -33,123 +33,229 @@ var soundDie = new buzz.sound("assets/sounds/sfx_die.ogg");
 var soundSwoosh = new buzz.sound("assets/sounds/sfx_swooshing.ogg");
 buzz.all().setVolume(volume);
 
-// Loops
+//loops
 var loopGameloop;
 var loopPipeloop;
 
 $(document).ready(function() {
-   if (window.location.search == "?debug")
-      debugmode = true;
-   if (window.location.search == "?easy")
-      pipeheight = 200;
+    if(window.location.search == "?debug")
+        debugmode = true;
+    if(window.location.search == "?easy")
+        pipeheight = 200;
 
-   // Get the high score
-   var savedscore = getCookie("highscore");
-   if (savedscore != "")
-      highscore = parseInt(savedscore);
+    //get the highscore
+    var savedscore = getCookie("highscore");
+    if(savedscore != "")
+        highscore = parseInt(savedscore);
 
-   // Start with the splash screen
-   showSplash();
+    //start with the splash screen
+    showSplash();
 });
 
 function getCookie(cname) {
-   var name = cname + "=";
-   var ca = document.cookie.split(';');
-   for (var i = 0; i < ca.length; i++) {
-      var c = ca[i].trim();
-      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-   }
-   return "";
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
 }
 
-function setCookie(cname, cvalue, exdays) {
-   var d = new Date();
-   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-   var expires = "expires=" + d.toGMTString();
-   document.cookie = cname + "=" + cvalue + "; " + expires;
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 function showSplash() {
-   currentstate = states.SplashScreen;
+    currentstate = states.SplashScreen;
 
-   // Set the defaults (again)
-   velocity = 0;
-   position = 180;
-   rotation = 0;
-   score = 0;
+    //set the defaults (again)
+    velocity = 0;
+    position = 180;
+    rotation = 0;
+    score = 0;
 
-   // Update the player in preparation for the next game
-   $("#player").css({ top: 180, left: 50 });
-   updatePlayer($("#player"));
+    //update the player in preparation for the next game
+    <span class="math-inline">\("\#player"\)\.css\(\{ y\: 0, x\: 0 \}\);
+updatePlayer\(</span>("#player"));
 
-   soundSwoosh.stop();
-   soundSwoosh.play();
+    soundSwoosh.stop();
+    soundSwoosh.play();
 
-   // Clear out all the pipes if there are any
-   $(".pipe").remove();
-   pipes = [];
+    //clear out all the pipes if there are any
+    $(".pipe").remove();
+    pipes = new Array();
 
-   // Make everything animated again
-   $(".animated").css('animation-play-state', 'running');
+    //make everything animated again
+    $(".animated").css('animation-play-state', 'running');
+    $(".animated").css('-webkit-animation-play-state', 'running');
 
-   // Fade in the splash
-   $("#splash").transition({ opacity: 1 }, 2000, 'ease');
+    //fade in the splash
+    $("#splash").transition({ opacity: 1 }, 2000, 'ease');
 }
 
 function startGame() {
-   currentstate = states.GameScreen;
+    currentstate = states.GameScreen;
 
-   // Fade out the splash
-   $("#splash").stop();
-   $("#splash").transition({ opacity: 0 }, 500, 'ease');
+    //fade out the splash
+    $("#splash").stop();
+    $("#splash").transition({ opacity: 0 }, 500, 'ease');
 
-   // Start up our loops
-   var updaterate = 1000.0 / 60.0; // 60 times a second
-   loopGameloop = setInterval(gameloop, updaterate);
-   loopPipeloop = setInterval(updatePipes, 1400);
+    //update the big score
+    setBigScore();
 
-   // Jump from the start!
-   playerJump();
+    //debug mode?
+    if(debugmode) {
+        //show the bounding boxes
+        $(".boundingbox").show();
+    }
+
+    //start up our loops
+    var updaterate = 1000.0 / 60.0 ; //60 times a second
+    loopGameloop = setInterval(gameloop, updaterate);
+    loopPipeloop = setInterval(updatePipes, 1400);
+
+    //jump from the start!
+    playerJump();
 }
 
 function updatePlayer(player) {
-   // Rotation
-   rotation = Math.min((velocity / 10) * 90, 90);
+    //rotation
+    rotation = Math.min((velocity / 10) * 90, 90);
 
-   // Apply rotation and position
-   $(player).css({ transform: `rotate(${rotation}deg)`, top: position });
+    //apply rotation and position
+    $(player).css({ rotate: rotation, top: position });
 }
 
 function gameloop() {
-   var player = $("#player");
+    var player = $("#player");
 
-   // Update the player speed/position
-   velocity += gravity;
-   position += velocity;
+    //update the player speed/position
+    velocity += gravity;
+    position += velocity;
 
-   // Update the player
-   updatePlayer(player);
+    //update the player
+    updatePlayer(player);
 
-   // Check for collisions (implement collision detection here)
-   if (checkCollisions(player)) {
-      playerDead();
-      return;
-   }
+    //create the bounding box
+    var box = document.getElementById('player').getBoundingClientRect();
+    var origwidth = 34.0;
+    var origheight = 24.0;
 
-   // Score and update the pipes
-   updateScoreAndPipes();
+    var boxwidth = origwidth - (Math.sin(Math.abs(rotation) / 90) * 8);
+    var boxheight = (origheight + box.height) / 2;
+    var boxleft = ((box.width - boxwidth) / 2) + box.left;
+    var boxtop = ((box.height - boxheight) / 2) + box.top;
+    var boxright = boxleft + boxwidth;
+    var boxbottom = boxtop + boxheight;
+
+    //if we're in debug mode, draw the bounding box
+    if(debugmode) {
+        var boundingbox = $("#playerbox");
+        boundingbox.css('left', boxleft);
+        boundingbox.css('top', boxtop);
+        boundingbox.css('height', boxheight);
+        boundingbox.css('width', boxwidth);
+    }
+
+    //did we hit the ground?
+    if(box.bottom >= $("#land").offset().top) {
+        playerDead();
+        return;
+    }
+
+    //have they tried to escape through the ceiling? :o
+    var ceiling = $("#ceiling");
+    if(boxtop <= (ceiling.offset().top + ceiling.height()))
+        position = 0;
+
+    //we can't go any further without a pipe
+    if(pipes[0] == null)
+        return;
+
+    //determine the bounding box of the next pipes inner area
+    var nextpipe = pipes[0];
+    var nextpipeupper = nextpipe.children(".pipe_upper");
+
+    var pipetop = nextpipeupper.offset().top + nextpipeupper.height();
+    var pipeleft = nextpipeupper.offset().left - 2; // for some reason it starts at the inner pipes offset, not the outer pipes.
+    var piperight = pipeleft + pipewidth;
+    var pipebottom = pipetop + pipeheight;
+
+    if(debugmode) {
+        var boundingbox = $("#pipebox");
+        boundingbox.css('left', pipeleft);
+        boundingbox.css('top', pipetop);
+        boundingbox.css('height', pipeheight);
+        boundingbox.css('width', pipewidth);
+    }
+
+    //have we gotten inside the pipe yet?
+    if(boxright > pipeleft) {
+        //we're within the pipe, have we passed between upper and lower pipes?
+        if(boxtop > pipetop && boxbottom < pipebottom) {
+            //yeah! we're within bounds
+
+        } else {
+            //no! we touched the pipe
+            playerDead();
+            return;
+        }
+    }
+
+
+    //have we passed the imminent danger?
+    if(boxleft > piperight) {
+        //yes, remove it
+        pipes.splice(0, 1);
+
+        //and score a point
+        playerScore();
+    }
 }
 
-function checkCollisions(player) {
-   // Placeholder for collision detection logic
-   return false; // Change this logic based on actual collision checks
+//Handle space bar
+$(document).keydown(function(e){
+    //space bar!
+    if(e.keyCode == 32) {
+        //in ScoreScreen, hitting space should click the "replay" button. else it's just a regular spacebar hit
+        if(currentstate == states.ScoreScreen)
+            $("#replay").click();
+        else
+            screenClick();
+    }
+});
+
+//Handle mouse down OR touch start
+if("ontouchstart" in window)
+    $(document).on("touchstart", screenClick);
+else
+    $(document).on("mousedown", screenClick);
+
+function screenClick() {
+    if(currentstate == states.GameScreen) {
+        playerJump();
+    } else if(currentstate == states.SplashScreen) {
+        startGame();
+    }
 }
 
 function playerJump() {
-   velocity = jump;
-   soundJump.stop();
-   soundJump.play();
+    velocity = jump;
+    //play jump sound
+    soundJump.stop();
+    soundJump.play();
 }
 
-// Add other game functions below...
-// (Similar to the existing JS code you provided earlier)
+function setBigScore(erase) {
+    var elemscore = $("#bigscore");
+    elemscore.empty();
+
+    if(erase)
+        return;
+
+    var digits = score.toString().split('');
+    for(var i = 0; i < digits.length; i++)
